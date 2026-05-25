@@ -1,0 +1,35 @@
+cmd: python src/models/train_tree.py
+deps:
+- path: config/params.yaml
+  hash: md5
+  md5: 9ecc9a5ab32265c720cf0819c38d7a2f
+  size: 1013
+- path: data/processed/X_test.npy
+  hash: md5
+  md5: 6b6a058f8451210727fc046c12dafd40
+  size: 315328
+- path: data/processed/X_train.npy
+  hash: md5
+  md5: 139d29c93863e77493345c4bf161fc03
+  size: 945408
+- path: data/processed/y_test.npy
+  hash: md5
+  md5: 11734815705e55fd9f6a655d3e5ddb2f
+  size: 15888
+- path: data/processed/y_train.npy
+  hash: md5
+  md5: e84cbbb67023ab36a75cda00b3a37e56
+  size: 47392
+- path: src/models/train_tree.py
+  hash: md5
+  md5: 85ade611bfcd8c924e41f26ce714e797
+  size: 2330
+outs:
+- path: models/decision_tree.pkl
+  hash: md5
+  md5: 4a60c4d20be8ec50fde2a073dc85f2be
+  size: 18497
+- path: reports/figures/decision_tree.png
+  hash: md5
+  md5: 0a8b422705ef7613b6e3a5c512b7e795
+  size: 354135

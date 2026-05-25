@@ -1,0 +1,31 @@
+cmd: python src/models/validate/validate_xgboost.py
+deps:
+- path: config/params.yaml
+  hash: md5
+  md5: 9ecc9a5ab32265c720cf0819c38d7a2f
+  size: 1013
+- path: data/processed/X_val.npy
+  hash: md5
+  md5: e0117b4d642f6eccb538772269c014c6
+  size: 315328
+- path: data/processed/y_val.npy
+  hash: md5
+  md5: 54404287281040542659c76d4ab0d686
+  size: 15888
+- path: models/xgboost.json
+  hash: md5
+  md5: c1d32b86fdedc92e2b8c495312939fab
+  size: 980842
+- path: src/models/validate/validate_xgboost.py
+  hash: md5
+  md5: fcda7ecc18aa23f566852d6d8f09cf51
+  size: 1511
+- path: src/utils/helpers.py
+  hash: md5
+  md5: 87385f137927f11b110e3c4e48ca4d75
+  size: 6600
+outs:
+- path: reports/metrics/val/xgboost.json
+  hash: md5
+  md5: 5a33a208b26f6052645d88ad2bf75e21
+  size: 129

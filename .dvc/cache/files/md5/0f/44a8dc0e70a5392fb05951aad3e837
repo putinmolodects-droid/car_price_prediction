@@ -1,0 +1,20 @@
+km_driven
+car_age
+owner_encoded
+mileage_num
+engine_num
+max_power_num
+torque_num
+fuel_CNG
+fuel_Diesel
+fuel_LPG
+fuel_Petrol
+seller_type_Dealer
+seller_type_Individual
+seller_type_Trustmark Dealer
+transmission_Automatic
+transmission_Manual
+brand_category_budget
+brand_category_mass
+brand_category_other
+brand_category_premium

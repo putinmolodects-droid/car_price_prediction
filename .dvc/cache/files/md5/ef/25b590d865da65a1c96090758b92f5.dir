@@ -1,0 +1,1 @@
+[{"md5": "78a1ef5c2d2281fc7f73cddda76395b3", "relpath": "metrics/val.mae.tsv"}, {"md5": "8bc37eebb7e9653f2bc2359ea88b2d8d", "relpath": "metrics/val.mse.tsv"}, {"md5": "8fdb4aeb5b91052fb95b58fff7e7e364", "relpath": "metrics/val.r2.tsv"}, {"md5": "cdaad41d3901da5dadf6e510d552f8d4", "relpath": "metrics/val.rmse.tsv"}]

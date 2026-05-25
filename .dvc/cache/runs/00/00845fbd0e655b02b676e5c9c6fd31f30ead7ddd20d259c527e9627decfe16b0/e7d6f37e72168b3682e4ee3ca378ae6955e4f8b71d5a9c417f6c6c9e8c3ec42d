@@ -1,0 +1,31 @@
+cmd: python src/models/validate/validate_catboost.py
+deps:
+- path: config/params.yaml
+  hash: md5
+  md5: 9ecc9a5ab32265c720cf0819c38d7a2f
+  size: 1013
+- path: data/processed/X_val_raw.csv
+  hash: md5
+  md5: c0d3ad59d46307965ffc7c8bd72a1da9
+  size: 151692
+- path: data/processed/y_val.npy
+  hash: md5
+  md5: 54404287281040542659c76d4ab0d686
+  size: 15888
+- path: models/catboost.cbm
+  hash: md5
+  md5: 44423699b9b40c8c9ae147a8d2232337
+  size: 107044
+- path: src/models/validate/validate_catboost.py
+  hash: md5
+  md5: 0b46d8bd3eb605afdf00fc7f73d4fc69
+  size: 1569
+- path: src/utils/helpers.py
+  hash: md5
+  md5: 87385f137927f11b110e3c4e48ca4d75
+  size: 6600
+outs:
+- path: reports/metrics/val/catboost.json
+  hash: md5
+  md5: fb13eb781f21ceb5f1ba6a7bccb09f9a
+  size: 129

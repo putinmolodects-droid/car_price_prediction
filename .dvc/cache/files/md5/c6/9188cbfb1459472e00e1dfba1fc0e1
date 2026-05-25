@@ -1,0 +1,21 @@
+feature,importance
+car_age,0.20536742
+transmission_Automatic,0.20029846
+fuel_Diesel,0.16955665
+owner_encoded,0.13390017
+max_power_num,0.10567887
+brand_category_mass,0.048339926
+brand_category_budget,0.02883943
+brand_category_premium,0.027355092
+engine_num,0.021185366
+seller_type_Individual,0.013314425
+torque_num,0.012759294
+seller_type_Dealer,0.006269912
+mileage_num,0.005990959
+brand_category_other,0.005883301
+seller_type_Trustmark Dealer,0.0050665447
+km_driven,0.0049482915
+fuel_Petrol,0.002629486
+fuel_LPG,0.0017764459
+fuel_CNG,0.0008399994
+transmission_Manual,0.0

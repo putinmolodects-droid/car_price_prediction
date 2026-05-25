@@ -1,0 +1,31 @@
+cmd: python src/models/validate/validate_nn.py
+deps:
+- path: config/params.yaml
+  hash: md5
+  md5: 9ecc9a5ab32265c720cf0819c38d7a2f
+  size: 1013
+- path: data/processed/X_val.npy
+  hash: md5
+  md5: e0117b4d642f6eccb538772269c014c6
+  size: 315328
+- path: data/processed/y_val.npy
+  hash: md5
+  md5: 54404287281040542659c76d4ab0d686
+  size: 15888
+- path: models/neural_network.keras
+  hash: md5
+  md5: cb66c58372e0870a62f9d6cea2b0b69a
+  size: 191417
+- path: src/models/validate/validate_nn.py
+  hash: md5
+  md5: bbb229bf20f16bf9620e6ca8114efbe7
+  size: 1569
+- path: src/utils/helpers.py
+  hash: md5
+  md5: 87385f137927f11b110e3c4e48ca4d75
+  size: 6600
+outs:
+- path: reports/metrics/val/neural_network.json
+  hash: md5
+  md5: 264fe9d8d44baff987f2731bccbeba06
+  size: 129

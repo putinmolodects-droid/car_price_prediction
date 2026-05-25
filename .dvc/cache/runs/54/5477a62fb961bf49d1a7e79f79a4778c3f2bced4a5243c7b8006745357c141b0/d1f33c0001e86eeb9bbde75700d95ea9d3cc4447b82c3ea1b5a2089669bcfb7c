@@ -1,0 +1,35 @@
+cmd: python src/models/test/test_nn.py
+deps:
+- path: config/params.yaml
+  hash: md5
+  md5: 9ecc9a5ab32265c720cf0819c38d7a2f
+  size: 1013
+- path: data/processed/X_test.npy
+  hash: md5
+  md5: 6b6a058f8451210727fc046c12dafd40
+  size: 315328
+- path: data/processed/y_test.npy
+  hash: md5
+  md5: 11734815705e55fd9f6a655d3e5ddb2f
+  size: 15888
+- path: models/neural_network.keras
+  hash: md5
+  md5: 31dab4aca925d920b228f4ff26b62b7d
+  size: 191417
+- path: src/models/test/test_nn.py
+  hash: md5
+  md5: e68f04bcc4f42a7b4f1397b5f6b9685f
+  size: 2165
+- path: src/utils/helpers.py
+  hash: md5
+  md5: 87385f137927f11b110e3c4e48ca4d75
+  size: 6600
+outs:
+- path: reports/figures/neural_network_predictions.png
+  hash: md5
+  md5: 6f164f7f1fc149258b590534b135ab1d
+  size: 216862
+- path: reports/metrics/test/neural_network.json
+  hash: md5
+  md5: 7e883d74f6cafaeca9cafd134ce84373
+  size: 130

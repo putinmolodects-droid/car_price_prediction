@@ -1,0 +1,35 @@
+cmd: python src/models/test/test_linear.py
+deps:
+- path: config/params.yaml
+  hash: md5
+  md5: 9ecc9a5ab32265c720cf0819c38d7a2f
+  size: 1013
+- path: data/processed/X_test.npy
+  hash: md5
+  md5: 6b6a058f8451210727fc046c12dafd40
+  size: 315328
+- path: data/processed/y_test.npy
+  hash: md5
+  md5: 11734815705e55fd9f6a655d3e5ddb2f
+  size: 15888
+- path: models/linear_regression.pkl
+  hash: md5
+  md5: 57232681fae1f5b23dcb680b0f270d8c
+  size: 889
+- path: src/models/test/test_linear.py
+  hash: md5
+  md5: 569f453b1e4c0922794a912b442f77a4
+  size: 2198
+- path: src/utils/helpers.py
+  hash: md5
+  md5: 87385f137927f11b110e3c4e48ca4d75
+  size: 6600
+outs:
+- path: reports/figures/linear_regression_predictions.png
+  hash: md5
+  md5: 6399a3c8230aba2c4cc2a2e0939618da
+  size: 174662
+- path: reports/metrics/test/linear_regression.json
+  hash: md5
+  md5: 307e065611936c38bede4bdd5b7be2f6
+  size: 130
