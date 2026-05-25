@@ -1,0 +1,54 @@
+# Базовые параметры
+base:
+  random_state: 42
+  test_size: 0.2
+  val_size: 0.25
+  current_year: 2026
+
+# Параметры данных
+data:
+  target: price
+  categorical_features:
+    - fuel
+    - seller_type
+    - transmission
+    - brand_category
+  numeric_features:
+    - km_driven
+    - car_age
+    - owner_encoded
+    - mileage_num
+    - engine_num
+    - max_power_num
+    - torque_num
+  use_log_transform: false
+  transform_type: sqrt  # none, log, sqrt
+
+# Параметры моделей
+models:
+  linear:
+    fit_intercept: true
+    positive: false
+  
+  decision_tree:
+    max_depth: 8
+    min_samples_split: 15
+    min_samples_leaf: 10
+  
+  catboost:
+    iterations: 300
+    learning_rate: 0.03
+    depth: 4
+    l2_leaf_reg: 10
+  
+  xgboost:
+    n_estimators: 300
+    max_depth: 5
+    learning_rate: 0.03
+    reg_lambda: 5
+  
+  neural_network:
+    epochs: 100
+    batch_size: 32
+    dropout_rate: 0.3
+    architecture: [128, 64, 32]

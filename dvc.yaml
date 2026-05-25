@@ -1,0 +1,333 @@
+stages:
+  preprocess:
+    cmd: python src/data/make_dataset.py
+    deps:
+    - data/raw/car_data.csv
+    - data/raw/CAR_DETAILS_FROM_CAR_DEKHO.csv
+    - data/raw/Car_details_v3.csv
+    - src/data/load_data.py
+    - src/data/preprocess.py
+    - src/data/make_dataset.py
+    - src/features/brand_processor.py
+    - src/utils/helpers.py
+    - config/params.yaml
+    outs:
+    - data/processed/X_train.npy
+    - data/processed/X_val.npy
+    - data/processed/X_test.npy
+    - data/processed/y_train.npy
+    - data/processed/y_val.npy
+    - data/processed/y_test.npy
+    - data/processed/X_train_raw.csv
+    - data/processed/X_val_raw.csv
+    - data/processed/X_test_raw.csv
+    - models/preprocessor.pkl
+    - models/feature_names.txt
+
+  train_linear:
+    cmd: python src/models/train/train_linear.py
+    deps:
+    - data/processed/X_train.npy
+    - data/processed/y_train.npy
+    - src/models/train/train_linear.py
+    - src/utils/helpers.py
+    - config/params.yaml
+    outs:
+    - models/linear_regression.pkl
+    - models/linear_coefficients.csv
+    metrics:
+    # - dvclive/train/linear_regression/metrics.json
+    - reports/metrics/train/linear_regression.json
+    plots:
+    # - dvclive/train/linear_regression/plots
+    - reports/figures/linear_coefficients.png
+
+  train_tree:
+    cmd: python src/models/train/train_tree.py
+    deps:
+    - data/processed/X_train.npy
+    - data/processed/y_train.npy
+    - src/models/train/train_tree.py
+    - src/utils/helpers.py
+    - config/params.yaml
+    outs:
+    - models/decision_tree.pkl
+    metrics:
+    # - dvclive/train/decision_tree/metrics.json
+    - reports/metrics/train/decision_tree.json
+    plots:
+    # - dvclive/train/decision_tree/plots
+    - reports/figures/decision_tree.png
+
+  train_catboost:
+    cmd: python src/models/train/train_catboost.py
+    deps:
+    - data/processed/X_train_raw.csv
+    - data/processed/y_train.npy
+    - src/models/train/train_catboost.py
+    - src/utils/helpers.py
+    - config/params.yaml
+    outs:
+    - models/catboost.cbm
+    - models/catboost_feature_importance.csv
+    metrics:
+    # - dvclive/train/catboost/metrics.json
+    - reports/metrics/train/catboost.json
+    plots:
+    # - dvclive/train/catboost/plots
+    - reports/figures/catboost_importance.png
+
+  train_xgboost:
+    cmd: python src/models/train/train_xgboost.py
+    deps:
+    - data/processed/X_train.npy
+    - data/processed/y_train.npy
+    - src/models/train/train_xgboost.py
+    - src/utils/helpers.py
+    - config/params.yaml
+    outs:
+    - models/xgboost.json
+    - models/xgboost_feature_importance.csv
+    metrics:
+    # - dvclive/train/xgboost/metrics.json
+    - reports/metrics/train/xgboost.json
+    plots:
+    # - dvclive/train/xgboost/plots
+    - reports/figures/xgboost_importance.png
+
+  train_nn:
+    cmd: python src/models/train/train_nn.py
+    deps:
+    - data/processed/X_train.npy
+    - data/processed/y_train.npy
+    - src/models/train/train_nn.py
+    - src/utils/helpers.py
+    - config/params.yaml
+    outs:
+    - models/neural_network.keras
+    metrics:
+    # - dvclive/train/neural_network/metrics.json
+    - reports/metrics/train/neural_network.json
+    plots:
+    # - dvclive/train/neural_network/plots
+    - reports/figures/nn_learning_curves.png
+    - reports/figures/nn_weights_histograms.png
+
+  validate_linear:
+    cmd: python src/models/validate/validate_linear.py
+    deps:
+    - data/processed/X_val.npy
+    - data/processed/y_val.npy
+    - models/linear_regression.pkl
+    - src/models/validate/validate_linear.py
+    - src/utils/helpers.py
+    - config/params.yaml
+    metrics:
+    # - dvclive/val/linear_regression/metrics.json
+    - reports/metrics/val/linear_regression.json
+    # plots:
+    # - dvclive/val/linear_regression/plots
+
+  validate_tree:
+    cmd: python src/models/validate/validate_tree.py
+    deps:
+    - data/processed/X_val.npy
+    - data/processed/y_val.npy
+    - models/decision_tree.pkl
+    - src/models/validate/validate_tree.py
+    - src/utils/helpers.py
+    - config/params.yaml
+    metrics:
+    # - dvclive/val/decision_tree/metrics.json
+    - reports/metrics/val/decision_tree.json
+    # plots:
+    # - dvclive/val/decision_tree/plots
+
+  validate_catboost:
+    cmd: python src/models/validate/validate_catboost.py
+    deps:
+    - data/processed/X_val_raw.csv
+    - data/processed/y_val.npy
+    - models/catboost.cbm
+    - src/models/validate/validate_catboost.py
+    - src/utils/helpers.py
+    - config/params.yaml
+    metrics:
+    # - dvclive/val/catboost/metrics.json
+    - reports/metrics/val/catboost.json
+    # plots:
+    # - dvclive/val/catboost/plots
+
+  validate_xgboost:
+    cmd: python src/models/validate/validate_xgboost.py
+    deps:
+    - data/processed/X_val.npy
+    - data/processed/y_val.npy
+    - models/xgboost.json
+    - src/models/validate/validate_xgboost.py
+    - src/utils/helpers.py
+    - config/params.yaml
+    metrics:
+    # - dvclive/val/xgboost/metrics.json
+    - reports/metrics/val/xgboost.json
+    # plots:
+    # - dvclive/val/xgboost/plots
+
+  validate_nn:
+    cmd: python src/models/validate/validate_nn.py
+    deps:
+    - data/processed/X_val.npy
+    - data/processed/y_val.npy
+    - models/neural_network.keras
+    - src/models/validate/validate_nn.py
+    - src/utils/helpers.py
+    - config/params.yaml
+    metrics:
+    # - dvclive/val/neural_network/metrics.json
+    - reports/metrics/val/neural_network.json
+    # plots:
+    # - dvclive/val/neural_network/plots
+
+  test_linear:
+    cmd: python src/models/test/test_linear.py
+    deps:
+    - data/processed/X_test.npy
+    - data/processed/y_test.npy
+    - models/linear_regression.pkl
+    - src/models/test/test_linear.py
+    - src/utils/helpers.py
+    - config/params.yaml
+    metrics:
+    # - dvclive/linear_regression/metrics.json
+    - reports/metrics/test/linear_regression.json
+    plots:
+    # - dvclive/linear_regression/plots
+    - reports/figures/linear_regression_predictions.png
+
+  test_tree:
+    cmd: python src/models/test/test_tree.py
+    deps:
+    - data/processed/X_test.npy
+    - data/processed/y_test.npy
+    - models/decision_tree.pkl
+    - src/models/test/test_tree.py
+    - src/utils/helpers.py
+    - config/params.yaml
+    metrics:
+    # - dvclive/decision_tree/metrics.json
+    - reports/metrics/test/decision_tree.json
+    plots:
+    # - dvclive/decision_tree/plots
+    - reports/figures/decision_tree_predictions.png
+
+  test_catboost:
+    cmd: python src/models/test/test_catboost.py
+    deps:
+    - data/processed/X_test_raw.csv
+    - data/processed/y_test.npy
+    - models/catboost.cbm
+    - src/models/test/test_catboost.py
+    - src/utils/helpers.py
+    - config/params.yaml
+    metrics:
+    # - dvclive/catboost/metrics.json
+    - reports/metrics/test/catboost.json
+    plots:
+    # - dvclive/catboost/plots
+    - reports/figures/catboost_predictions.png
+    - reports/figures/catboost_importance_test.png
+
+  test_xgboost:
+    cmd: python src/models/test/test_xgboost.py
+    deps:
+    - data/processed/X_test.npy
+    - data/processed/y_test.npy
+    - models/xgboost.json
+    - src/models/test/test_xgboost.py
+    - src/utils/helpers.py
+    - config/params.yaml
+    metrics:
+    # - dvclive/xgboost/metrics.json
+    - reports/metrics/test/xgboost.json
+    plots:
+    # - dvclive/xgboost/plots
+    - reports/figures/xgboost_predictions.png
+    - reports/figures/xgboost_importance_test.png
+
+  test_nn:
+    cmd: python src/models/test/test_nn.py
+    deps:
+    - data/processed/X_test.npy
+    - data/processed/y_test.npy
+    - models/neural_network.keras
+    - src/models/test/test_nn.py
+    - src/utils/helpers.py
+    - config/params.yaml
+    metrics:
+    # - dvclive/neural_network/metrics.json
+    - reports/metrics/test/neural_network.json
+    plots:
+    # - dvclive/neural_network/plots
+    - reports/figures/neural_network_predictions.png
+
+  evaluate:
+    cmd: python src/models/evaluate.py
+    deps:
+    - reports/metrics/test/linear_regression.json
+    - reports/metrics/test/decision_tree.json
+    - reports/metrics/test/catboost.json
+    - reports/metrics/test/xgboost.json
+    - reports/metrics/test/neural_network.json
+    - reports/metrics/train/linear_regression.json
+    - reports/metrics/train/decision_tree.json
+    - reports/metrics/train/catboost.json
+    - reports/metrics/train/xgboost.json
+    - reports/metrics/train/neural_network.json
+    - reports/metrics/val/linear_regression.json
+    - reports/metrics/val/decision_tree.json
+    - reports/metrics/val/catboost.json
+    - reports/metrics/val/xgboost.json
+    - reports/metrics/val/neural_network.json
+    - src/models/evaluate.py
+    outs:
+    - model_comparison.csv
+    - reports/final_report.csv
+    plots:
+    - reports/figures/metrics_comparison.png
+    - reports/figures/metrics_detailed.png
+# metrics:
+# - dvclive/linear_regression/metrics.json
+# - dvclive/decision_tree/metrics.json
+# - dvclive/catboost/metrics.json
+# - dvclive/xgboost/metrics.json
+# - dvclive/neural_network/metrics.json
+# - dvclive/test/linear_regression/metrics.json
+# - dvclive/test/linear_regression/metrics.json
+# plots:
+# - dvclive/linear_regression/plots/metrics:
+#     x: step
+# - dvclive/decision_tree/plots/metrics:
+#     x: step
+# - dvclive/catboost/plots/metrics:
+#     x: step
+# - dvclive/xgboost/plots/metrics:
+#     x: step
+# - dvclive/neural_network/plots/metrics:
+#     x: step
+
+# artifacts:
+#   linear_regression_metrics:
+#     path: reports/metrics/linear_regression_metrics.json
+#     type: metrics
+#   Decision_tree_metrics:
+#     path: reports/metrics/Decision_tree_metrics.json
+#     type: metrics
+#   CatBoost_metrics:
+#     path: reports/metrics/CatBoost_metrics.json
+#     type: metrics
+#   XGBoost_metrics:
+#     path: reports/metrics/XGBoost_metrics.json
+#     type: metrics
+#   NeuralNetwork_metrics:
+#     path: reports/metrics/NeuralNetwork_metrics.json
+#     type: metrics

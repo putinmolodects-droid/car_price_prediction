@@ -1,0 +1,849 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/data/make_dataset.py
+    deps:
+    - path: config/params.yaml
+      hash: md5
+      md5: 9ecc9a5ab32265c720cf0819c38d7a2f
+      size: 1013
+    - path: data/raw/CAR_DETAILS_FROM_CAR_DEKHO.csv
+      hash: md5
+      md5: 6837df3951bb370d6b95c05883037726
+      size: 325663
+    - path: data/raw/Car_details_v3.csv
+      hash: md5
+      md5: 70c521fb83f383f120a27b3904c6fdcc
+      size: 976332
+    - path: data/raw/car_data.csv
+      hash: md5
+      md5: b1fddc19227abae7473082d60dfabc73
+      size: 15857
+    - path: src/data/load_data.py
+      hash: md5
+      md5: aac462510d1493599c5303087646b60f
+      size: 1966
+    - path: src/data/make_dataset.py
+      hash: md5
+      md5: e850bb90c87b6cfbcc59ae4072b63669
+      size: 4571
+    - path: src/data/preprocess.py
+      hash: md5
+      md5: 2b863c9dd3484b6cf7a68d74d4b5c942
+      size: 3672
+    - path: src/features/brand_processor.py
+      hash: md5
+      md5: df457205bc03c5f315f14cf7c5ccea58
+      size: 3173
+    - path: src/utils/helpers.py
+      hash: md5
+      md5: 87385f137927f11b110e3c4e48ca4d75
+      size: 6600
+    outs:
+    - path: data/processed/X_test.npy
+      hash: md5
+      md5: 6b6a058f8451210727fc046c12dafd40
+      size: 315328
+    - path: data/processed/X_test_raw.csv
+      hash: md5
+      md5: 852cb31539a4364afcb50032cf288b44
+      size: 151435
+    - path: data/processed/X_train.npy
+      hash: md5
+      md5: 139d29c93863e77493345c4bf161fc03
+      size: 945408
+    - path: data/processed/X_train_raw.csv
+      hash: md5
+      md5: dd8b9eb8236f7903c21450be19903c9e
+      size: 453664
+    - path: data/processed/X_val.npy
+      hash: md5
+      md5: e0117b4d642f6eccb538772269c014c6
+      size: 315328
+    - path: data/processed/X_val_raw.csv
+      hash: md5
+      md5: c0d3ad59d46307965ffc7c8bd72a1da9
+      size: 151692
+    - path: data/processed/y_test.npy
+      hash: md5
+      md5: 11734815705e55fd9f6a655d3e5ddb2f
+      size: 15888
+    - path: data/processed/y_train.npy
+      hash: md5
+      md5: e84cbbb67023ab36a75cda00b3a37e56
+      size: 47392
+    - path: data/processed/y_val.npy
+      hash: md5
+      md5: 54404287281040542659c76d4ab0d686
+      size: 15888
+    - path: models/feature_names.txt
+      hash: md5
+      md5: 0f44a8dc0e70a5392fb05951aad3e837
+      size: 340
+    - path: models/preprocessor.pkl
+      hash: md5
+      md5: 6bc1d1a7992a8b3178950ae94db7b1c3
+      size: 3634
+  train_linear:
+    cmd: python src/models/train/train_linear.py
+    deps:
+    - path: config/params.yaml
+      hash: md5
+      md5: 9ecc9a5ab32265c720cf0819c38d7a2f
+      size: 1013
+    - path: data/processed/X_train.npy
+      hash: md5
+      md5: 139d29c93863e77493345c4bf161fc03
+      size: 945408
+    - path: data/processed/y_train.npy
+      hash: md5
+      md5: e84cbbb67023ab36a75cda00b3a37e56
+      size: 47392
+    - path: src/models/train/train_linear.py
+      hash: md5
+      md5: 55118cbd4b75bcd9320d29c412213948
+      size: 2931
+    - path: src/utils/helpers.py
+      hash: md5
+      md5: 87385f137927f11b110e3c4e48ca4d75
+      size: 6600
+    outs:
+    - path: dvclive/train/linear_regression/metrics.json
+      hash: md5
+      md5: cc63ca293940922edec74b9d257ac203
+      size: 171
+    - path: dvclive/train/linear_regression/plots
+      hash: md5
+      md5: d740815ef4285056f870c4611b202489.dir
+      size: 150
+      nfiles: 4
+    - path: models/linear_coefficients.csv
+      hash: md5
+      md5: a24a19e7519d3a0fb70433ba5a3ee595
+      size: 741
+    - path: models/linear_regression.pkl
+      hash: md5
+      md5: 57232681fae1f5b23dcb680b0f270d8c
+      size: 889
+    - path: reports/figures/linear_coefficients.png
+      hash: md5
+      md5: 65977a0e5c47704e805ecc3a724d03fe
+      size: 64522
+    - path: reports/metrics/train/linear_regression.json
+      hash: md5
+      md5: a2ba9b63a4bdc5267389ce4936476ef7
+      size: 129
+  train_tree:
+    cmd: python src/models/train/train_tree.py
+    deps:
+    - path: config/params.yaml
+      hash: md5
+      md5: 9ecc9a5ab32265c720cf0819c38d7a2f
+      size: 1013
+    - path: data/processed/X_train.npy
+      hash: md5
+      md5: 139d29c93863e77493345c4bf161fc03
+      size: 945408
+    - path: data/processed/y_train.npy
+      hash: md5
+      md5: e84cbbb67023ab36a75cda00b3a37e56
+      size: 47392
+    - path: src/models/train/train_tree.py
+      hash: md5
+      md5: d3a5168e09f74e46c772ff588ebad86e
+      size: 2643
+    - path: src/utils/helpers.py
+      hash: md5
+      md5: 87385f137927f11b110e3c4e48ca4d75
+      size: 6600
+    outs:
+    - path: dvclive/train/decision_tree/metrics.json
+      hash: md5
+      md5: fe3631755c09cb1b2bca59a198ba2565
+      size: 171
+    - path: dvclive/train/decision_tree/plots
+      hash: md5
+      md5: ae733dd9f88bcd861637504b4a6949c3.dir
+      size: 150
+      nfiles: 4
+    - path: models/decision_tree.pkl
+      hash: md5
+      md5: 4a60c4d20be8ec50fde2a073dc85f2be
+      size: 18497
+    - path: reports/figures/decision_tree.png
+      hash: md5
+      md5: 0a8b422705ef7613b6e3a5c512b7e795
+      size: 354135
+    - path: reports/metrics/train/decision_tree.json
+      hash: md5
+      md5: 48479d868277565e0ea1d9211f509589
+      size: 129
+  train_catboost:
+    cmd: python src/models/train/train_catboost.py
+    deps:
+    - path: config/params.yaml
+      hash: md5
+      md5: 9ecc9a5ab32265c720cf0819c38d7a2f
+      size: 1013
+    - path: data/processed/X_train_raw.csv
+      hash: md5
+      md5: dd8b9eb8236f7903c21450be19903c9e
+      size: 453664
+    - path: data/processed/y_train.npy
+      hash: md5
+      md5: e84cbbb67023ab36a75cda00b3a37e56
+      size: 47392
+    - path: src/models/train/train_catboost.py
+      hash: md5
+      md5: 77ec89c4c123b16cf4751d6c55a6e1be
+      size: 2919
+    - path: src/utils/helpers.py
+      hash: md5
+      md5: 87385f137927f11b110e3c4e48ca4d75
+      size: 6600
+    outs:
+    - path: dvclive/train/catboost/metrics.json
+      hash: md5
+      md5: 7e6a04fe0c371f9da3d61d263c225e73
+      size: 170
+    - path: dvclive/train/catboost/plots
+      hash: md5
+      md5: b53edb6e2b92e34c2f626286af212fdb.dir
+      size: 149
+      nfiles: 4
+    - path: models/catboost.cbm
+      hash: md5
+      md5: 7fac3e0730a737197a1129e61e263d63
+      size: 107044
+    - path: models/catboost_feature_importance.csv
+      hash: md5
+      md5: bc72a39c722fc2c38f53c757908b8e0e
+      size: 359
+    - path: reports/figures/catboost_importance.png
+      hash: md5
+      md5: 088affe49a9d5879b7e0db856b5414bf
+      size: 46650
+    - path: reports/metrics/train/catboost.json
+      hash: md5
+      md5: 64db1adc1bb57de6cd40593ff4344a35
+      size: 128
+  train_xgboost:
+    cmd: python src/models/train/train_xgboost.py
+    deps:
+    - path: config/params.yaml
+      hash: md5
+      md5: 9ecc9a5ab32265c720cf0819c38d7a2f
+      size: 1013
+    - path: data/processed/X_train.npy
+      hash: md5
+      md5: 139d29c93863e77493345c4bf161fc03
+      size: 945408
+    - path: data/processed/y_train.npy
+      hash: md5
+      md5: e84cbbb67023ab36a75cda00b3a37e56
+      size: 47392
+    - path: src/models/train/train_xgboost.py
+      hash: md5
+      md5: 96d16fb58401af86e00134223b578164
+      size: 2708
+    - path: src/utils/helpers.py
+      hash: md5
+      md5: 87385f137927f11b110e3c4e48ca4d75
+      size: 6600
+    outs:
+    - path: dvclive/train/xgboost/metrics.json
+      hash: md5
+      md5: 2c69422e4188a465a19b57baca42634c
+      size: 170
+    - path: dvclive/train/xgboost/plots
+      hash: md5
+      md5: 390c7a4dd562effca9665bea83e1a221.dir
+      size: 149
+      nfiles: 4
+    - path: models/xgboost.json
+      hash: md5
+      md5: c1d32b86fdedc92e2b8c495312939fab
+      size: 980842
+    - path: models/xgboost_feature_importance.csv
+      hash: md5
+      md5: c69188cbfb1459472e00e1dfba1fc0e1
+      size: 592
+    - path: reports/figures/xgboost_importance.png
+      hash: md5
+      md5: 67f92a89df4eef1936b1eed5b0237c42
+      size: 69891
+    - path: reports/metrics/train/xgboost.json
+      hash: md5
+      md5: 80da73b3b3f42f65c28e7b49bb2316c9
+      size: 128
+  train_nn:
+    cmd: python src/models/train/train_nn.py
+    deps:
+    - path: config/params.yaml
+      hash: md5
+      md5: 9ecc9a5ab32265c720cf0819c38d7a2f
+      size: 1013
+    - path: data/processed/X_train.npy
+      hash: md5
+      md5: 139d29c93863e77493345c4bf161fc03
+      size: 945408
+    - path: data/processed/y_train.npy
+      hash: md5
+      md5: e84cbbb67023ab36a75cda00b3a37e56
+      size: 47392
+    - path: src/models/train/train_nn.py
+      hash: md5
+      md5: 8be3d44acf9d0db92f1aeed6d004cc04
+      size: 11206
+    - path: src/utils/helpers.py
+      hash: md5
+      md5: 87385f137927f11b110e3c4e48ca4d75
+      size: 6600
+    outs:
+    - path: dvclive/train/neural_network/metrics.json
+      hash: md5
+      md5: 959bc65ab807e3cf7a7dc2ecdfd8a7d2
+      size: 173
+    - path: dvclive/train/neural_network/plots
+      hash: md5
+      md5: c29094f779445d7f1565c2bd60374ef0.dir
+      size: 152
+      nfiles: 4
+    - path: models/neural_network.keras
+      hash: md5
+      md5: 5754b49ad8cec59be9fe536d1e44640d
+      size: 191417
+    - path: reports/figures/nn_learning_curves.png
+      hash: md5
+      md5: 6a5b1c10c811b41e043ab59d4cae5627
+      size: 68904
+    - path: reports/figures/nn_weights_histograms.png
+      hash: md5
+      md5: 99fbd3b6a8eb40572cde4b26f056e7f7
+      size: 111323
+    - path: reports/metrics/train/neural_network.json
+      hash: md5
+      md5: c2b3469d967c1c633ccf36ef40d9f6fd
+      size: 131
+  validate_linear:
+    cmd: python src/models/validate/validate_linear.py
+    deps:
+    - path: config/params.yaml
+      hash: md5
+      md5: 9ecc9a5ab32265c720cf0819c38d7a2f
+      size: 1013
+    - path: data/processed/X_val.npy
+      hash: md5
+      md5: e0117b4d642f6eccb538772269c014c6
+      size: 315328
+    - path: data/processed/y_val.npy
+      hash: md5
+      md5: 54404287281040542659c76d4ab0d686
+      size: 15888
+    - path: models/linear_regression.pkl
+      hash: md5
+      md5: 57232681fae1f5b23dcb680b0f270d8c
+      size: 889
+    - path: src/models/validate/validate_linear.py
+      hash: md5
+      md5: 74f532b4d642fbeb21d8a8874b617ab9
+      size: 1570
+    - path: src/utils/helpers.py
+      hash: md5
+      md5: 87385f137927f11b110e3c4e48ca4d75
+      size: 6600
+    outs:
+    - path: dvclive/val/linear_regression/metrics.json
+      hash: md5
+      md5: 35d2bfd3565585cb8e0dd47d4f13f0c1
+      size: 164
+    - path: dvclive/val/linear_regression/plots
+      hash: md5
+      md5: cd51af01b77149494f7abeb1a502912f.dir
+      size: 143
+      nfiles: 4
+    - path: reports/metrics/val/linear_regression.json
+      hash: md5
+      md5: 5b10de20ee962377d6bd55d3924cf67d
+      size: 130
+  validate_tree:
+    cmd: python src/models/validate/validate_tree.py
+    deps:
+    - path: config/params.yaml
+      hash: md5
+      md5: 9ecc9a5ab32265c720cf0819c38d7a2f
+      size: 1013
+    - path: data/processed/X_val.npy
+      hash: md5
+      md5: e0117b4d642f6eccb538772269c014c6
+      size: 315328
+    - path: data/processed/y_val.npy
+      hash: md5
+      md5: 54404287281040542659c76d4ab0d686
+      size: 15888
+    - path: models/decision_tree.pkl
+      hash: md5
+      md5: 4a60c4d20be8ec50fde2a073dc85f2be
+      size: 18497
+    - path: src/models/validate/validate_tree.py
+      hash: md5
+      md5: 6da60ffa45ccf0863d57d72edf899e9e
+      size: 1528
+    - path: src/utils/helpers.py
+      hash: md5
+      md5: 87385f137927f11b110e3c4e48ca4d75
+      size: 6600
+    outs:
+    - path: dvclive/val/decision_tree/metrics.json
+      hash: md5
+      md5: 5dfd03e664cebb2f2334f7ef743e2c03
+      size: 164
+    - path: dvclive/val/decision_tree/plots
+      hash: md5
+      md5: ef25b590d865da65a1c96090758b92f5.dir
+      size: 143
+      nfiles: 4
+    - path: reports/metrics/val/decision_tree.json
+      hash: md5
+      md5: 4a1191814ac0985668983337cbd4d8e2
+      size: 130
+  validate_catboost:
+    cmd: python src/models/validate/validate_catboost.py
+    deps:
+    - path: config/params.yaml
+      hash: md5
+      md5: 9ecc9a5ab32265c720cf0819c38d7a2f
+      size: 1013
+    - path: data/processed/X_val_raw.csv
+      hash: md5
+      md5: c0d3ad59d46307965ffc7c8bd72a1da9
+      size: 151692
+    - path: data/processed/y_val.npy
+      hash: md5
+      md5: 54404287281040542659c76d4ab0d686
+      size: 15888
+    - path: models/catboost.cbm
+      hash: md5
+      md5: 7fac3e0730a737197a1129e61e263d63
+      size: 107044
+    - path: src/models/validate/validate_catboost.py
+      hash: md5
+      md5: 0b46d8bd3eb605afdf00fc7f73d4fc69
+      size: 1569
+    - path: src/utils/helpers.py
+      hash: md5
+      md5: 87385f137927f11b110e3c4e48ca4d75
+      size: 6600
+    outs:
+    - path: dvclive/val/catboost/metrics.json
+      hash: md5
+      md5: e175ab4ccea97b0cbf827ef7240df861
+      size: 163
+    - path: dvclive/val/catboost/plots
+      hash: md5
+      md5: 8939f7e5b228c26b3485f420b90cdb46.dir
+      size: 142
+      nfiles: 4
+    - path: reports/metrics/val/catboost.json
+      hash: md5
+      md5: fb13eb781f21ceb5f1ba6a7bccb09f9a
+      size: 129
+  validate_xgboost:
+    cmd: python src/models/validate/validate_xgboost.py
+    deps:
+    - path: config/params.yaml
+      hash: md5
+      md5: 9ecc9a5ab32265c720cf0819c38d7a2f
+      size: 1013
+    - path: data/processed/X_val.npy
+      hash: md5
+      md5: e0117b4d642f6eccb538772269c014c6
+      size: 315328
+    - path: data/processed/y_val.npy
+      hash: md5
+      md5: 54404287281040542659c76d4ab0d686
+      size: 15888
+    - path: models/xgboost.json
+      hash: md5
+      md5: c1d32b86fdedc92e2b8c495312939fab
+      size: 980842
+    - path: src/models/validate/validate_xgboost.py
+      hash: md5
+      md5: 6c8a71d6588e1faf9528cd00d8d73b81
+      size: 1485
+    - path: src/utils/helpers.py
+      hash: md5
+      md5: 87385f137927f11b110e3c4e48ca4d75
+      size: 6600
+    outs:
+    - path: dvclive/val/xgboost/metrics.json
+      hash: md5
+      md5: ed33629a4cf0d5cdb4f4e6ece783f3b6
+      size: 163
+    - path: dvclive/val/xgboost/plots
+      hash: md5
+      md5: cf28e9dbd5b454bf37f05b82e988d654.dir
+      size: 142
+      nfiles: 4
+    - path: reports/metrics/val/xgboost.json
+      hash: md5
+      md5: 44ffb9e30b286e52c97afb78003b1164
+      size: 129
+  validate_nn:
+    cmd: python src/models/validate/validate_nn.py
+    deps:
+    - path: config/params.yaml
+      hash: md5
+      md5: 9ecc9a5ab32265c720cf0819c38d7a2f
+      size: 1013
+    - path: data/processed/X_val.npy
+      hash: md5
+      md5: e0117b4d642f6eccb538772269c014c6
+      size: 315328
+    - path: data/processed/y_val.npy
+      hash: md5
+      md5: 54404287281040542659c76d4ab0d686
+      size: 15888
+    - path: models/neural_network.keras
+      hash: md5
+      md5: 5754b49ad8cec59be9fe536d1e44640d
+      size: 191417
+    - path: src/models/validate/validate_nn.py
+      hash: md5
+      md5: bbb229bf20f16bf9620e6ca8114efbe7
+      size: 1569
+    - path: src/utils/helpers.py
+      hash: md5
+      md5: 87385f137927f11b110e3c4e48ca4d75
+      size: 6600
+    outs:
+    - path: dvclive/val/neural_network/metrics.json
+      hash: md5
+      md5: 83407e22f51cf4085cff777cce8d8cda
+      size: 164
+    - path: dvclive/val/neural_network/plots
+      hash: md5
+      md5: 32e50abbfe138bf114e28e61a5e7c539.dir
+      size: 143
+      nfiles: 4
+    - path: reports/metrics/val/neural_network.json
+      hash: md5
+      md5: 94a29be49d77845ecc2d6f41c1251461
+      size: 130
+  test_linear:
+    cmd: python src/models/test/test_linear.py
+    deps:
+    - path: config/params.yaml
+      hash: md5
+      md5: 9ecc9a5ab32265c720cf0819c38d7a2f
+      size: 1013
+    - path: data/processed/X_test.npy
+      hash: md5
+      md5: 6b6a058f8451210727fc046c12dafd40
+      size: 315328
+    - path: data/processed/y_test.npy
+      hash: md5
+      md5: 11734815705e55fd9f6a655d3e5ddb2f
+      size: 15888
+    - path: models/linear_regression.pkl
+      hash: md5
+      md5: 57232681fae1f5b23dcb680b0f270d8c
+      size: 889
+    - path: src/models/test/test_linear.py
+      hash: md5
+      md5: a69b7b65c4f69005cc7047b24d5f08ca
+      size: 2172
+    - path: src/utils/helpers.py
+      hash: md5
+      md5: 87385f137927f11b110e3c4e48ca4d75
+      size: 6600
+    outs:
+    - path: dvclive/test/linear_regression/metrics.json
+      hash: md5
+      md5: 53543fb3840e610ab740814baf63613b
+      size: 167
+    - path: dvclive/test/linear_regression/plots
+      hash: md5
+      md5: a3d31c61f5668f3aaa76db9b4f4e4dd0.dir
+      size: 146
+      nfiles: 4
+    - path: reports/figures/linear_regression_predictions.png
+      hash: md5
+      md5: cf64b19728a8a6bd40e75f7d70dc3901
+      size: 216993
+    - path: reports/metrics/test/linear_regression.json
+      hash: md5
+      md5: 496b47d76b4267fe54998ee5f9d050f0
+      size: 129
+  test_tree:
+    cmd: python src/models/test/test_tree.py
+    deps:
+    - path: config/params.yaml
+      hash: md5
+      md5: 9ecc9a5ab32265c720cf0819c38d7a2f
+      size: 1013
+    - path: data/processed/X_test.npy
+      hash: md5
+      md5: 6b6a058f8451210727fc046c12dafd40
+      size: 315328
+    - path: data/processed/y_test.npy
+      hash: md5
+      md5: 11734815705e55fd9f6a655d3e5ddb2f
+      size: 15888
+    - path: models/decision_tree.pkl
+      hash: md5
+      md5: 4a60c4d20be8ec50fde2a073dc85f2be
+      size: 18497
+    - path: src/models/test/test_tree.py
+      hash: md5
+      md5: 51c54a10ca17bee15ba7023d02afa409
+      size: 2122
+    - path: src/utils/helpers.py
+      hash: md5
+      md5: 87385f137927f11b110e3c4e48ca4d75
+      size: 6600
+    outs:
+    - path: dvclive/test/decision_tree/metrics.json
+      hash: md5
+      md5: 13b31061dbcb293c3f17da39879efe4a
+      size: 168
+    - path: dvclive/test/decision_tree/plots
+      hash: md5
+      md5: 3434d311625500ec2bb6c0635839560e.dir
+      size: 147
+      nfiles: 4
+    - path: reports/figures/decision_tree_predictions.png
+      hash: md5
+      md5: dad3ef6598733cf1fa22eb652867a8e3
+      size: 206760
+    - path: reports/metrics/test/decision_tree.json
+      hash: md5
+      md5: 8a147c118f6088a2fad120c8f8c5f2fa
+      size: 130
+  test_catboost:
+    cmd: python src/models/test/test_catboost.py
+    deps:
+    - path: config/params.yaml
+      hash: md5
+      md5: 9ecc9a5ab32265c720cf0819c38d7a2f
+      size: 1013
+    - path: data/processed/X_test_raw.csv
+      hash: md5
+      md5: 852cb31539a4364afcb50032cf288b44
+      size: 151435
+    - path: data/processed/y_test.npy
+      hash: md5
+      md5: 11734815705e55fd9f6a655d3e5ddb2f
+      size: 15888
+    - path: models/catboost.cbm
+      hash: md5
+      md5: 7fac3e0730a737197a1129e61e263d63
+      size: 107044
+    - path: src/models/test/test_catboost.py
+      hash: md5
+      md5: e11a3217643ae21ac5d213e26c705fa6
+      size: 2524
+    - path: src/utils/helpers.py
+      hash: md5
+      md5: 87385f137927f11b110e3c4e48ca4d75
+      size: 6600
+    outs:
+    - path: dvclive/test/catboost/metrics.json
+      hash: md5
+      md5: b6ed72ed74cbf99ec5771ed6c6aed217
+      size: 167
+    - path: dvclive/test/catboost/plots
+      hash: md5
+      md5: 1727c77914488626c3f507f8060aeeb1.dir
+      size: 146
+      nfiles: 4
+    - path: reports/figures/catboost_importance_test.png
+      hash: md5
+      md5: 5d6a588b17e4b6384e8df299e8e58a25
+      size: 47836
+    - path: reports/figures/catboost_predictions.png
+      hash: md5
+      md5: 7377d9ab83223946d80a495a84df1a9c
+      size: 217772
+    - path: reports/metrics/test/catboost.json
+      hash: md5
+      md5: 66ba33bfbc46d9b2e274745184d1e91c
+      size: 129
+  test_xgboost:
+    cmd: python src/models/test/test_xgboost.py
+    deps:
+    - path: config/params.yaml
+      hash: md5
+      md5: 9ecc9a5ab32265c720cf0819c38d7a2f
+      size: 1013
+    - path: data/processed/X_test.npy
+      hash: md5
+      md5: 6b6a058f8451210727fc046c12dafd40
+      size: 315328
+    - path: data/processed/y_test.npy
+      hash: md5
+      md5: 11734815705e55fd9f6a655d3e5ddb2f
+      size: 15888
+    - path: models/xgboost.json
+      hash: md5
+      md5: c1d32b86fdedc92e2b8c495312939fab
+      size: 980842
+    - path: src/models/test/test_xgboost.py
+      hash: md5
+      md5: e6f1006be2fce64cd6316c0a02752f18
+      size: 2614
+    - path: src/utils/helpers.py
+      hash: md5
+      md5: 87385f137927f11b110e3c4e48ca4d75
+      size: 6600
+    outs:
+    - path: dvclive/test/xgboost/metrics.json
+      hash: md5
+      md5: c1c4ae2c9dfd76c0f38dbcb908851dc9
+      size: 168
+    - path: dvclive/test/xgboost/plots
+      hash: md5
+      md5: 57a6f34cf824e967e31aa31521c7a57f.dir
+      size: 147
+      nfiles: 4
+    - path: reports/figures/xgboost_importance_test.png
+      hash: md5
+      md5: 388b88d10aacc51144c7e86adf391d7b
+      size: 71040
+    - path: reports/figures/xgboost_predictions.png
+      hash: md5
+      md5: b23438b8b02dab1ca75e77d8e956ff2b
+      size: 216101
+    - path: reports/metrics/test/xgboost.json
+      hash: md5
+      md5: 9329206e3692f5f51e527356867ef2d6
+      size: 130
+  test_nn:
+    cmd: python src/models/test/test_nn.py
+    deps:
+    - path: config/params.yaml
+      hash: md5
+      md5: 9ecc9a5ab32265c720cf0819c38d7a2f
+      size: 1013
+    - path: data/processed/X_test.npy
+      hash: md5
+      md5: 6b6a058f8451210727fc046c12dafd40
+      size: 315328
+    - path: data/processed/y_test.npy
+      hash: md5
+      md5: 11734815705e55fd9f6a655d3e5ddb2f
+      size: 15888
+    - path: models/neural_network.keras
+      hash: md5
+      md5: 5754b49ad8cec59be9fe536d1e44640d
+      size: 191417
+    - path: src/models/test/test_nn.py
+      hash: md5
+      md5: e68f04bcc4f42a7b4f1397b5f6b9685f
+      size: 2165
+    - path: src/utils/helpers.py
+      hash: md5
+      md5: 87385f137927f11b110e3c4e48ca4d75
+      size: 6600
+    outs:
+    - path: dvclive/test/neural_network/metrics.json
+      hash: md5
+      md5: 5bfaf09504d9cccf8cc68bbe916f224e
+      size: 168
+    - path: dvclive/test/neural_network/plots
+      hash: md5
+      md5: 309e2b3ba3e9aa0561d08549829864d4.dir
+      size: 147
+      nfiles: 4
+    - path: reports/figures/neural_network_predictions.png
+      hash: md5
+      md5: 6ff7d371a26387258ab65df7d0568717
+      size: 219398
+    - path: reports/metrics/test/neural_network.json
+      hash: md5
+      md5: b84f3bc85c8403db14d008ad7121ed36
+      size: 130
+  evaluate:
+    cmd: python src/models/evaluate.py
+    deps:
+    - path: reports/metrics/test/catboost.json
+      hash: md5
+      md5: 66ba33bfbc46d9b2e274745184d1e91c
+      size: 129
+    - path: reports/metrics/test/decision_tree.json
+      hash: md5
+      md5: 8a147c118f6088a2fad120c8f8c5f2fa
+      size: 130
+    - path: reports/metrics/test/linear_regression.json
+      hash: md5
+      md5: 496b47d76b4267fe54998ee5f9d050f0
+      size: 129
+    - path: reports/metrics/test/neural_network.json
+      hash: md5
+      md5: b84f3bc85c8403db14d008ad7121ed36
+      size: 130
+    - path: reports/metrics/test/xgboost.json
+      hash: md5
+      md5: 9329206e3692f5f51e527356867ef2d6
+      size: 130
+    - path: reports/metrics/train/catboost.json
+      hash: md5
+      md5: 64db1adc1bb57de6cd40593ff4344a35
+      size: 128
+    - path: reports/metrics/train/decision_tree.json
+      hash: md5
+      md5: 48479d868277565e0ea1d9211f509589
+      size: 129
+    - path: reports/metrics/train/linear_regression.json
+      hash: md5
+      md5: a2ba9b63a4bdc5267389ce4936476ef7
+      size: 129
+    - path: reports/metrics/train/neural_network.json
+      hash: md5
+      md5: c2b3469d967c1c633ccf36ef40d9f6fd
+      size: 131
+    - path: reports/metrics/train/xgboost.json
+      hash: md5
+      md5: 80da73b3b3f42f65c28e7b49bb2316c9
+      size: 128
+    - path: reports/metrics/val/catboost.json
+      hash: md5
+      md5: fb13eb781f21ceb5f1ba6a7bccb09f9a
+      size: 129
+    - path: reports/metrics/val/decision_tree.json
+      hash: md5
+      md5: 4a1191814ac0985668983337cbd4d8e2
+      size: 130
+    - path: reports/metrics/val/linear_regression.json
+      hash: md5
+      md5: 5b10de20ee962377d6bd55d3924cf67d
+      size: 130
+    - path: reports/metrics/val/neural_network.json
+      hash: md5
+      md5: 94a29be49d77845ecc2d6f41c1251461
+      size: 130
+    - path: reports/metrics/val/xgboost.json
+      hash: md5
+      md5: 44ffb9e30b286e52c97afb78003b1164
+      size: 129
+    - path: src/models/evaluate.py
+      hash: md5
+      md5: 65c48dbdec9b9cd82eb635244d20a6ec
+      size: 9566
+    outs:
+    - path: model_comparison.csv
+      hash: md5
+      md5: cf1457c75eb2d9402bc42dce39a8344a
+      size: 1445
+    - path: reports/figures/metrics_comparison.png
+      hash: md5
+      md5: bebd3c1a622158967346eee9055e1d4a
+      size: 109393
+    - path: reports/figures/metrics_detailed.png
+      hash: md5
+      md5: 6eba7ec04a2506a555666a1eeba35beb
+      size: 122954
+    - path: reports/final_report.csv
+      hash: md5
+      md5: 1e2ce4263c0dd89233a35e127aacc124
+      size: 425
